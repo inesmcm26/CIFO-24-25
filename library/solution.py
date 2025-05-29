@@ -1,3 +1,4 @@
+import numpy as np
 from abc import ABC, abstractmethod
 
 class Solution(ABC):
@@ -20,3 +21,14 @@ class Solution(ABC):
     @abstractmethod
     def random_initial_representation(self):
         pass
+
+class PSOSolution(Solution):
+    def __init__(
+        self,
+        repr = None,
+    ):
+        super().__init__(repr=repr)
+
+        self.best_repr = self.repr
+        self.best_fitness = self.fitness()
+        self.velocity = np.array([0 for _ in range(len(self.repr))])
